@@ -24,9 +24,8 @@ const SignUp = () => {
 
     try {
       const result = await createUser(form.email, form.password, form.username);
-      //setUser(result);
-
-      //set it to global state...
+      setUser(result);
+      setIsLogged(true);
 
       router.replace("/home");
     } catch (error) {
