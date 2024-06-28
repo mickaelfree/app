@@ -10,6 +10,7 @@ import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
   const { isLoading, isLoaggedIn } = useGlobalContext();
+
   if (!isLoading && isLoaggedIn) return <Redirect href="/home" />;
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -47,7 +48,7 @@ export default function App() {
           />
         </View>
       </ScrollView>
-      <StatusBar backgroundColor="#161622" style="light" />
+      <StatusBar backgroundColor="#161622" style="dark" />
     </SafeAreaView>
   );
 }
