@@ -13,7 +13,7 @@ import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
 
@@ -59,7 +59,7 @@ const Home = () => {
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 lastest Video
               </Text>
-              <Trending posts={lastesPosts ?? []} />
+              <Trending posts={lastestPosts ?? []} />
             </View>
           </View>
         )}

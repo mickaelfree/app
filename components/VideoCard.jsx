@@ -1,6 +1,7 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import { React, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { icons } from "../constants";
 
 const VideoCard = ({ video: { title, creator, avatar, thumbnail, video } }) => {
   const [play, setplay] = useState(false);
@@ -19,9 +20,7 @@ const VideoCard = ({ video: { title, creator, avatar, thumbnail, video } }) => {
           <text className="text-white font-psemibold text-sm" numberOfLines={1}>
             {title}
           </text>
-          <Text className="text-xs text-gray-100 font-pregular">
-            {username}
-          </Text>
+          <Text className="text-xs text-gray-100 font-pregular">{creator}</Text>
         </View>
       </View>
       <View className="pt-2">

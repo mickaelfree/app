@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import React from "react";
+import { React, useState } from "react";
 import { ImageBackground } from "react-native-web";
 
 const zoomIn = {
