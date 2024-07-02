@@ -1,13 +1,7 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Touchable,
-  TouchableOpacity,
-} from "react-native";
+import { Text, FlatList, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { React, useState } from "react";
-import { ImageBackground } from "react-native-web";
+import { ImageBackground } from "react-native";
 
 const zoomIn = {
   0: {
@@ -26,8 +20,8 @@ const zoomOut = {
   },
 };
 const TrendingItem = ({ activeItem, item }) => {
-  const [play, setPlay] = usestate(false);
-  retrun(
+  const [play, setPlay] = useState(false);
+  return (
     <Animatable.View
       className="mr-5"
       animation={activeItem === item.$id ? zoomIn : zoomOut}
@@ -47,7 +41,7 @@ const TrendingItem = ({ activeItem, item }) => {
           />
         </TouchableOpacity>
       )}
-    </Animatable.View>,
+    </Animatable.View>
   );
 };
 const Trending = ({ posts }) => {
