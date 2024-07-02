@@ -1,7 +1,9 @@
 import { Text, FlatList, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { React, useState } from "react";
-import { ImageBackground } from "react-native";
+import { ImageBackground, Image } from "react-native";
+import { Video, ResizeMode } from "expo-av";
+import { icons } from "../constants";
 
 const zoomIn = {
   0: {
@@ -24,11 +26,22 @@ const TrendingItem = ({ activeItem, item }) => {
   return (
     <Animatable.View
       className="mr-5"
-      animation={activeItem === item.$id ? zoomIn : zoomOut}
+      animation={activeItem.$id === item.$id ? zoomIn : zoomOut}
       duration={500}
     >
       {play ? (
-        <Text className="text-white">Playing</Text>
+        <Video
+          source={{ uri: item.video }}
+          className="w-52 h-72 rounded-[35px] mt-3 bg-white/10"
+          resizrMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            if (!status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
       ) : (
         <TouchableOpacity
           className="relative justify-center items-center"
@@ -37,7 +50,13 @@ const TrendingItem = ({ activeItem, item }) => {
         >
           <ImageBackground
             source={{ uri: item.thumbnail }}
-            className="w-52 h-72 rounded-[35px] my-5 shadow-lg overflow-hidden"
+            className="w-52 h-72 rounded-[35px] my-5 shadow-lg overflow-hidden shadow-black/40"
+            resizeMode="cover"
+          />
+          <Image
+            source={icons.play}
+            className="w-12 h-12 absolute"
+            resizeMode="contain"
           />
         </TouchableOpacity>
       )}
@@ -45,7 +64,13 @@ const TrendingItem = ({ activeItem, item }) => {
   );
 };
 const Trending = ({ posts }) => {
-  const [activeItem, setActiveItem] = useState(posts[0]);
+  const [activeItem, setActiveItem] = useState(posts[1]);
+
+  const viewableItemsChanged = ({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setActiveItem(viewableItems[0].key);
+    }
+  };
 
   return (
     <FlatList
@@ -54,6 +79,11 @@ const Trending = ({ posts }) => {
       renderItem={({ item }) => (
         <TrendingItem activeItem={activeItem} item={item} />
       )}
+      onViewableItemsChanged={viewableItemsChanged}
+      viwabilityConfig={{
+        itemVisiblePercentThreshold: 70,
+      }}
+      contentOffest={{ x: 170 }}
       horizontal
     />
   );
