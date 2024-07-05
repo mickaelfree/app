@@ -80,7 +80,7 @@ const Trending = ({ posts }) => {
         <TrendingItem activeItem={activeItem} item={item} />
       )}
       onViewableItemsChanged={viewableItemsChanged}
-      viwabilityConfig={{
+      viewabilityConfig={{
         itemVisiblePercentThreshold: 70,
       }}
       contentOffest={{ x: 170 }}
